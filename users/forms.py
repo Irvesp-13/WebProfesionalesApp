@@ -10,50 +10,6 @@ class CustomUserCreationForm(UserCreationForm):
         model = CustomUser
         fields = ['email', 'name', 'surname', 'control_number', 'age', 'tel', 'password1', 'password2']
 
-        # widgets = {
-        #     'email': forms.EmailInput(
-        #     attrs={
-        #         'class': 'form-control',
-        #         'placeholder': 'ejemplo@utez.edu.mx',
-        #         'pattern': '[a-z0-9]+@utez\.edu\.mx',
-        #         'title': 'Debes usar un correo de la UTEZ',
-        #         'required': 'required'
-        #     }
-        #     ),
-        #     'name': forms.TextInput(attrs={
-        #     'class': 'form-control',
-        #     'placeholder': 'Nombre'
-        #     }),
-        #     'surname': forms.TextInput(attrs={
-        #     'class': 'form-control',
-        #     'placeholder': 'Apellido'
-        #     }),
-        #     'control_number': forms.TextInput(attrs={
-        #     'class': 'form-control',
-        #     'placeholder': 'Número de Control'
-        #     }),
-        #     'age': forms.NumberInput(attrs={
-        #     'class': 'form-control',
-        #     'placeholder': 'Edad'
-        #     }),
-        #     'tel': forms.TextInput(attrs={
-        #     'class': 'form-control',
-        #     'placeholder': 'Teléfono',
-        #     'pattern': '^\d{10}$',
-        #     'title': 'El número de teléfono debe tener 10 dígitos'
-        #     }),
-        #     'password1': forms.PasswordInput(attrs={
-        #     'class': 'form-control',
-        #     'pattern':"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$",
-        #     'placeholder': 'Contraseña'
-        #     }),
-        #     'password2': forms.PasswordInput(attrs={
-        #     'class': 'form-control',
-        #     'pattern':"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$",
-        #     'placeholder': 'Confirmar Contraseña'
-        #     }),
-        # }
-
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if not email.endswith('@utez.edu.mx'):
@@ -72,7 +28,6 @@ class CustomUserCreationForm(UserCreationForm):
             raise forms.ValidationError("El número de teléfono debe tener 10 dígitos.")
         return tel
     
-    
     def clean_password1(self):
         password1 = self.cleaned_data.get('password1')
         if len(password1) < 8:
@@ -88,7 +43,6 @@ class CustomUserCreationForm(UserCreationForm):
             raise forms.ValidationError("La contraseña debe contener al menos un carácter especial (@$!%*?&).")
 
         return password1
-    
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -97,13 +51,7 @@ class CustomUserCreationForm(UserCreationForm):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError("Las contraseñas no coinciden.")
 
-        return password2  
-
-    
-    
-
-
-
+        return password2
 
 class CustomUserLoginForm(AuthenticationForm):
     username = forms.EmailField(
@@ -133,4 +81,3 @@ class CustomUserLoginForm(AuthenticationForm):
     def confirm_login_allowed(self, user):
         if not user.is_active:
             raise forms.ValidationError("Esta cuenta está desactivada.")
-        
