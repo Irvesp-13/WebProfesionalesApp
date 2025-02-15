@@ -36,8 +36,8 @@ def registrar_modulo(request):
     return render(request, 'registrar.html', {'form': form})
 
 def json_modulo(request):
-    # Obtener todas las instancias del objeto de la base de datos
+    
     modulos = Modulo.objects.all()
 
-    # Pasar los datos a la plantilla
+    
     return render(request, 'vistaJson.html', {'modulos': modulos})

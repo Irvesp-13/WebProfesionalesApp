@@ -32,13 +32,13 @@
 
     <script>
         function cargarCategorias() {
-            fetch('/modulos/json/')  // Asegúrate de que esta URL sea correcta
+            fetch('/modulos/json/')  
                 .then(response => response.json())
                 .then(data => {
                     let div = document.getElementById('modulos');
-                    div.innerHTML = '';  // Limpiar el contenedor antes de agregar nuevas cards
+                    div.innerHTML = '';  
 
-                    // Iterar sobre los datos y crear las cards
+                    
                     data.forEach(modulo => {
                         div.innerHTML += `
                         <div class="col-md-4 mb-4">
@@ -54,7 +54,7 @@
                 .catch(error => console.error('Error:', error));
         }
 
-        // Llamar a la función para cargar las categorías al cargar la página
+        
         cargarCategorias();
     </script>
 </body>
