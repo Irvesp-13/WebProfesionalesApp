@@ -29,4 +29,5 @@ urlpatterns = [
     path('api/error_logs/', get_error_logs, name='get_error_logs'),
     path('users/', include('users.urls')),
     path('productos/', include('productos.urls')),
+    path('modulos/', include('modulos.urls')),
 ]
