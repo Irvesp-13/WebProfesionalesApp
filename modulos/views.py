@@ -29,7 +29,7 @@ def registrar_modulo(request):
         form = moduloForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('registrar') # Redirige a la lista de modulos
+            return redirect('json') # Redirige a la lista de modulos
     # Pintar un formulario vacio
     else:
         form = moduloForm()
@@ -39,5 +39,4 @@ def json_modulo(request):
     
     modulos = Modulo.objects.all()
 
-    
     return render(request, 'vistaJson.html', {'modulos': modulos})
